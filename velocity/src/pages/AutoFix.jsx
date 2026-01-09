@@ -59,7 +59,7 @@ const AutoFix = () => {
       before: '8.5 hrs',
       after: '2.6 hrs',
       improvement: '3.3x faster',
-      icon: '🚀',
+      icon: '',
       color: 'purple',
     },
     {
@@ -67,7 +67,7 @@ const AutoFix = () => {
       before: '$142',
       after: '$46',
       improvement: '-$96 (68%)',
-      icon: '💰',
+      icon: '',
       color: 'green',
     },
     {
@@ -75,7 +75,7 @@ const AutoFix = () => {
       before: '$42,600',
       after: '$13,800',
       improvement: '-$28,800',
-      icon: '📊',
+      icon: '',
       color: 'green',
     },
   ];
@@ -102,68 +102,116 @@ const AutoFix = () => {
     },
   ];
 
-  const getStatusColor = (completed) => {
-    return completed ? 'bg-green-500' : 'bg-gray-300';
-  };
-
-  const getStatusIcon = (status) => {
-    if (status === 'Generated') return '📝';
-    if (status === 'Merged') return '✓';
-    if (status === 'Deployed') return '🚀';
-    return '✓';
-  };
-
   return (
-    <Layout pageTitle="Auto-Fix Details" pageStatus="Deployed">
-      <div className="space-y-6">
+    <Layout pageTitle="Auto-Fix Details" pageSubtitle="Automated code optimization and deployment">
+      <div style={{ display: 'grid', gap: '24px' }}>
         {/* PR Header */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
-          <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-4">
-            <div className="flex items-start space-x-3 sm:space-x-4">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-2xl sm:text-3xl">{getStatusIcon(pullRequest.status)}</span>
+        <div style={{
+          background: 'var(--card-bg)',
+          border: '1px solid var(--card-border)',
+          borderRadius: '12px',
+          padding: '24px',
+          boxShadow: 'var(--shadow)'
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            gap: '20px',
+            marginBottom: '20px',
+            flexWrap: 'wrap'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+              <div style={{
+                width: '56px',
+                height: '56px',
+                background: 'rgba(16, 124, 16, 0.1)',
+                borderRadius: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '32px',
+                flexShrink: 0
+              }}>
+                ✓
               </div>
               <div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
-                  <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">{pullRequest.title}</h2>
-                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold border border-green-200">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                  <h2 style={{ fontSize: '20px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                    {pullRequest.title}
+                  </h2>
+                  <span style={{
+                    padding: '4px 12px',
+                    background: 'rgba(16, 124, 16, 0.1)',
+                    color: 'var(--success)',
+                    borderRadius: '12px',
+                    fontSize: '12px',
+                    fontWeight: 600,
+                    border: '1px solid rgba(16, 124, 16, 0.2)'
+                  }}>
                     {pullRequest.status}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600">
-                  Pull Request: <span className="font-mono font-semibold text-blue-600">{pullRequest.id}</span> • 
-                  Fixes Issue: <span className="font-mono font-semibold text-red-600 ml-1">{pullRequest.issueId}</span>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                  Pull Request: <span style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--accent)' }}>{pullRequest.id}</span> • 
+                  Fixes Issue: <span style={{ fontFamily: 'monospace', fontWeight: 600, color: 'var(--warning)', marginLeft: '4px' }}>{pullRequest.issueId}</span>
                 </p>
-                <p className="text-sm text-gray-600 mt-1">
-                  Repository: <span className="font-mono">{pullRequest.repository}</span>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+                  Repository: <span style={{ fontFamily: 'monospace' }}>{pullRequest.repository}</span>
                 </p>
               </div>
             </div>
           </div>
 
           {/* Status Timeline */}
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <h3 className="text-sm font-bold text-gray-700 mb-4">Deployment Status</h3>
-            <div className="flex items-center justify-between overflow-x-auto pb-2">
+          <div style={{
+            marginTop: '24px',
+            paddingTop: '24px',
+            borderTop: '1px solid var(--card-border)'
+          }}>
+            <h3 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              Deployment Status
+            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', overflowX: 'auto', paddingBottom: '8px' }}>
               {statusSteps.map((step, index) => (
-                <div key={index} className="flex items-center flex-1">
-                  <div className="flex flex-col items-center">
-                    <div className={`w-10 h-10 rounded-full ${getStatusColor(step.completed)} flex items-center justify-center`}>
+                <div key={index} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      background: step.completed ? 'var(--success)' : 'var(--bg-secondary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: step.completed ? 'none' : '2px solid var(--card-border)'
+                    }}>
                       {step.completed ? (
-                        <span className="text-white font-bold">✓</span>
+                        <span style={{ color: 'white', fontWeight: 700, fontSize: '18px' }}>✓</span>
                       ) : (
-                        <span className="text-gray-500 font-bold">{index + 1}</span>
+                        <span style={{ color: 'var(--text-tertiary)', fontWeight: 700 }}>{index + 1}</span>
                       )}
                     </div>
-                    <p className={`text-xs font-medium mt-2 ${step.completed ? 'text-gray-900' : 'text-gray-500'}`}>
+                    <p style={{
+                      fontSize: '12px',
+                      fontWeight: 500,
+                      marginTop: '8px',
+                      color: step.completed ? 'var(--text-primary)' : 'var(--text-tertiary)'
+                    }}>
                       {step.label}
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p style={{ fontSize: '11px', color: 'var(--text-tertiary)', marginTop: '4px' }}>
                       {step.completed && new Date(step.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
                   {index < statusSteps.length - 1 && (
-                    <div className={`flex-1 h-1 mx-2 ${step.completed ? 'bg-green-500' : 'bg-gray-300'}`}></div>
+                    <div style={{
+                      flex: 1,
+                      height: '3px',
+                      margin: '0 8px',
+                      background: step.completed ? 'var(--success)' : 'var(--card-border)',
+                      borderRadius: '2px'
+                    }}></div>
                   )}
                 </div>
               ))}
@@ -173,72 +221,89 @@ const AutoFix = () => {
 
         {/* Before vs After Comparison */}
         <div>
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Before vs After</h3>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '20px' }}>
+            Before vs After
+          </h3>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '24px'
+          }}
+          className="comparison-grid-responsive">
             {/* Before Card */}
-            <div className="bg-red-50 rounded-lg border-2 border-red-200 p-4 sm:p-6">
-              <div className="flex items-center space-x-2 mb-4">
-                <span className="text-xl sm:text-2xl">❌</span>
-                <h4 className="text-base sm:text-lg font-bold text-red-900">Before Fix</h4>
+            <div style={{
+              background: 'rgba(209, 52, 56, 0.05)',
+              border: '2px solid rgba(209, 52, 56, 0.2)',
+              borderRadius: '12px',
+              padding: '24px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                <span style={{ fontSize: '28px' }}></span>
+                <h4 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--error)' }}>Before Fix</h4>
               </div>
-              <div className="space-y-3">
-                <div className="bg-white rounded-lg p-3 border border-red-100">
-                  <p className="text-xs text-gray-600">Pipeline Throughput</p>
-                  <p className="text-lg font-bold text-red-700">{comparison.before.pipelineThroughput}</p>
+              <div style={{ display: 'grid', gap: '12px' }}>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(209, 52, 56, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Pipeline Throughput</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--error)' }}>{comparison.before.pipelineThroughput}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-red-100">
-                  <p className="text-xs text-gray-600">Batch Wait Time</p>
-                  <p className="text-lg font-bold text-red-700">{comparison.before.batchWaitTime}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(209, 52, 56, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Batch Wait Time</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--error)' }}>{comparison.before.batchWaitTime}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-red-100">
-                  <p className="text-xs text-gray-600">GPU Idle Time</p>
-                  <p className="text-lg font-bold text-red-700">{comparison.before.gpuIdle}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(209, 52, 56, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>GPU Idle Time</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--error)' }}>{comparison.before.gpuIdle}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-red-100">
-                  <p className="text-xs text-gray-600">Training Time</p>
-                  <p className="text-lg font-bold text-red-700">{comparison.before.trainingTime}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(209, 52, 56, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Training Time</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--error)' }}>{comparison.before.trainingTime}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-red-100">
-                  <p className="text-xs text-gray-600">Cost per Run</p>
-                  <p className="text-lg font-bold text-red-700">{comparison.before.costPerRun}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(209, 52, 56, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Cost per Run</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--error)' }}>{comparison.before.costPerRun}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-red-100">
-                  <p className="text-xs text-gray-600">Library Stack</p>
-                  <p className="text-sm font-semibold text-red-700">{comparison.before.library}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(209, 52, 56, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Library Stack</p>
+                  <p style={{ fontSize: '14px', fontWeight: 600, color: 'var(--error)' }}>{comparison.before.library}</p>
                 </div>
               </div>
             </div>
 
             {/* After Card */}
-            <div className="bg-green-50 rounded-lg border-2 border-green-200 p-4 sm:p-6">
-              <div className="flex items-center space-x-2 mb-4">
-                <span className="text-xl sm:text-2xl">✅</span>
-                <h4 className="text-base sm:text-lg font-bold text-green-900">After Fix</h4>
+            <div style={{
+              background: 'rgba(16, 124, 16, 0.05)',
+              border: '2px solid rgba(16, 124, 16, 0.2)',
+              borderRadius: '12px',
+              padding: '24px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                <span style={{ fontSize: '28px' }}></span>
+                <h4 style={{ fontSize: '18px', fontWeight: 700, color: 'var(--success)' }}>After Fix</h4>
               </div>
-              <div className="space-y-3">
-                <div className="bg-white rounded-lg p-3 border border-green-100">
-                  <p className="text-xs text-gray-600">Pipeline Throughput</p>
-                  <p className="text-lg font-bold text-green-700">{comparison.after.pipelineThroughput}</p>
+              <div style={{ display: 'grid', gap: '12px' }}>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(16, 124, 16, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Pipeline Throughput</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--success)' }}>{comparison.after.pipelineThroughput}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-green-100">
-                  <p className="text-xs text-gray-600">Batch Wait Time</p>
-                  <p className="text-lg font-bold text-green-700">{comparison.after.batchWaitTime}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(16, 124, 16, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Batch Wait Time</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--success)' }}>{comparison.after.batchWaitTime}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-green-100">
-                  <p className="text-xs text-gray-600">GPU Idle Time</p>
-                  <p className="text-lg font-bold text-green-700">{comparison.after.gpuIdle}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(16, 124, 16, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>GPU Idle Time</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--success)' }}>{comparison.after.gpuIdle}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-green-100">
-                  <p className="text-xs text-gray-600">Training Time</p>
-                  <p className="text-lg font-bold text-green-700">{comparison.after.trainingTime}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(16, 124, 16, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Training Time</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--success)' }}>{comparison.after.trainingTime}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-green-100">
-                  <p className="text-xs text-gray-600">Cost per Run</p>
-                  <p className="text-lg font-bold text-green-700">{comparison.after.costPerRun}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(16, 124, 16, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Cost per Run</p>
+                  <p style={{ fontSize: '18px', fontWeight: 700, color: 'var(--success)' }}>{comparison.after.costPerRun}</p>
                 </div>
-                <div className="bg-white rounded-lg p-3 border border-green-100">
-                  <p className="text-xs text-gray-600">Library Stack</p>
-                  <p className="text-sm font-semibold text-green-700">{comparison.after.library}</p>
+                <div style={{ background: 'var(--card-bg)', borderRadius: '8px', padding: '12px', border: '1px solid rgba(16, 124, 16, 0.1)' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '4px' }}>Library Stack</p>
+                  <p style={{ fontSize: '14px', fontWeight: 600, color: 'var(--success)' }}>{comparison.after.library}</p>
                 </div>
               </div>
             </div>
@@ -247,29 +312,56 @@ const AutoFix = () => {
 
         {/* Performance Improvements */}
         <div>
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Performance & Cost Improvements</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '20px' }}>
+            Performance & Cost Improvements
+          </h3>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '20px'
+          }}
+          className="kpi-grid-responsive">
             {improvements.map((item, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-2xl">{item.icon}</span>
-                  <span className={`px-2 py-1 rounded text-xs font-bold ${
-                    item.color === 'green' ? 'bg-green-100 text-green-700' :
-                    item.color === 'blue' ? 'bg-blue-100 text-blue-700' :
-                    'bg-purple-100 text-purple-700'
-                  }`}>
+              <div key={index} style={{
+                background: 'var(--card-bg)',
+                border: '1px solid var(--card-border)',
+                borderRadius: '12px',
+                padding: '20px',
+                boxShadow: 'var(--shadow)',
+                transition: 'all 0.2s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = 'var(--shadow)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+                  <span style={{ fontSize: '28px' }}>{item.icon}</span>
+                  <span style={{
+                    padding: '4px 10px',
+                    borderRadius: '12px',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    background: item.color === 'green' ? 'rgba(16, 124, 16, 0.1)' : item.color === 'blue' ? 'rgba(0, 120, 212, 0.1)' : 'rgba(139, 92, 246, 0.1)',
+                    color: item.color === 'green' ? 'var(--success)' : item.color === 'blue' ? 'var(--accent)' : '#8B5CF6'
+                  }}>
                     {item.improvement}
                   </span>
                 </div>
-                <h4 className="text-sm font-semibold text-gray-700 mb-3">{item.metric}</h4>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-500">Before:</span>
-                    <span className="font-semibold text-red-600">{item.before}</span>
+                <h4 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '12px' }}>
+                  {item.metric}
+                </h4>
+                <div style={{ display: 'grid', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px' }}>
+                    <span style={{ color: 'var(--text-tertiary)' }}>Before:</span>
+                    <span style={{ fontWeight: 600, color: 'var(--error)' }}>{item.before}</span>
                   </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-500">After:</span>
-                    <span className="font-semibold text-green-600">{item.after}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px' }}>
+                    <span style={{ color: 'var(--text-tertiary)' }}>After:</span>
+                    <span style={{ fontWeight: 600, color: 'var(--success)' }}>{item.after}</span>
                   </div>
                 </div>
               </div>
@@ -278,22 +370,49 @@ const AutoFix = () => {
         </div>
 
         {/* Changes Summary */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
-          <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-4">Code Changes Summary</h3>
-          <div className="space-y-3">
+        <div style={{
+          background: 'var(--card-bg)',
+          border: '1px solid var(--card-border)',
+          borderRadius: '12px',
+          padding: '24px',
+          boxShadow: 'var(--shadow)'
+        }}>
+          <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '20px' }}>
+            Code Changes Summary
+          </h3>
+          <div style={{ display: 'grid', gap: '12px' }}>
             {changes.map((change, index) => (
-              <div key={index} className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <div className={`px-3 py-1 rounded text-xs font-semibold ${
-                  change.type === 'Modified' ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'
-                }`}>
+              <div key={index} style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '16px',
+                padding: '16px',
+                background: 'var(--bg-secondary)',
+                borderRadius: '8px',
+                border: '1px solid var(--card-border)',
+                flexWrap: 'wrap'
+              }}>
+                <div style={{
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  background: change.type === 'Modified' ? 'rgba(0, 120, 212, 0.1)' : 'rgba(16, 124, 16, 0.1)',
+                  color: change.type === 'Modified' ? 'var(--accent)' : 'var(--success)',
+                  border: change.type === 'Modified' ? '1px solid rgba(0, 120, 212, 0.2)' : '1px solid rgba(16, 124, 16, 0.2)'
+                }}>
                   {change.type}
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-1">
-                    <p className="font-mono text-sm font-semibold text-gray-900">{change.file}</p>
-                    <span className="text-xs font-mono text-gray-500">{change.changes}</span>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px', flexWrap: 'wrap' }}>
+                    <p style={{ fontFamily: 'monospace', fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                      {change.file}
+                    </p>
+                    <span style={{ fontFamily: 'monospace', fontSize: '12px', color: 'var(--text-tertiary)' }}>
+                      {change.changes}
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-600">{change.description}</p>
+                  <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>{change.description}</p>
                 </div>
               </div>
             ))}
@@ -301,24 +420,79 @@ const AutoFix = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200 p-4 sm:p-6">
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <span className="text-2xl sm:text-3xl">🎉</span>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '20px',
+          background: 'linear-gradient(135deg, rgba(0, 120, 212, 0.05), rgba(74, 158, 255, 0.05))',
+          border: '1px solid rgba(0, 120, 212, 0.2)',
+          borderRadius: '12px',
+          padding: '24px',
+          flexWrap: 'wrap'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <span style={{ fontSize: '32px' }}></span>
             <div>
-              <h4 className="text-sm sm:text-base font-bold text-gray-900">Fix Successfully Deployed</h4>
-              <p className="text-xs sm:text-sm text-gray-600">System is now operating at optimal efficiency</p>
+              <h4 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '4px' }}>
+                Fix Successfully Deployed
+              </h4>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+                System is now operating at optimal efficiency
+              </p>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full lg:w-auto">
-            <button className="px-5 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm font-bold hover:bg-gray-50 transition-colors">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            <button style={{
+              padding: '10px 20px',
+              background: 'var(--card-bg)',
+              border: '1px solid var(--card-border)',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: 'var(--text-primary)',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.background = 'var(--bg-secondary)'}
+            onMouseLeave={(e) => e.target.style.background = 'var(--card-bg)'}>
               View PR on GitHub
             </button>
-            <button className="px-5 py-2 bg-blue-600 text-white rounded-lg text-sm font-bold hover:bg-blue-700 transition-colors">
+            <button style={{
+              padding: '10px 20px',
+              background: 'var(--accent)',
+              border: 'none',
+              borderRadius: '8px',
+              fontSize: '14px',
+              fontWeight: 600,
+              color: 'white',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => e.target.style.opacity = '0.9'}
+            onMouseLeave={(e) => e.target.style.opacity = '1'}>
               Back to Dashboard
             </button>
           </div>
         </div>
       </div>
+
+      {/* Responsive CSS */}
+      <style>{`
+        @media (max-width: 1200px) {
+          .kpi-grid-responsive {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .comparison-grid-responsive {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .kpi-grid-responsive {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </Layout>
   );
 };

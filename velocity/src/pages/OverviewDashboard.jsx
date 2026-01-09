@@ -5,17 +5,143 @@ import { SimpleLineChart } from '../components/Charts';
 
 const OverviewDashboard = () => {
   const chartData = [
-    { day: 1, energy: 820, cost: 164 },
-    { day: 5, energy: 780, cost: 156 },
-    { day: 10, energy: 850, cost: 170 },
-    { day: 15, energy: 720, cost: 144 },
-    { day: 20, energy: 650, cost: 130 },
+    { day: 1, energy: 920, cost: 184 },
+    { day: 5, energy: 880, cost: 176 },
+    { day: 10, energy: 820, cost: 164 },
+    { day: 15, energy: 750, cost: 150 },
+    { day: 20, energy: 680, cost: 136 },
     { day: 25, energy: 620, cost: 124 },
     { day: 30, energy: 580, cost: 116 }
   ];
 
   return (
     <Layout pageTitle="Platform Overview" pageSubtitle="Real-time monitoring across 12 services">
+      {/* User Profile Card */}
+      <div style={{
+        background: 'var(--card-bg)',
+        border: '1px solid var(--card-border)',
+        borderRadius: '12px',
+        padding: '24px',
+        marginBottom: '24px',
+        boxShadow: 'var(--shadow)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '20px'
+      }}>
+        {/* User Info Section */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #0078D4, #4A9EFF)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'white',
+            fontSize: '24px',
+            fontWeight: 600
+          }}>
+            SC
+          </div>
+          <div>
+            <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '4px' }}>Demo User</h3>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '6px' }}>demo@velocity.app</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{
+                padding: '4px 12px',
+                background: 'linear-gradient(135deg, #0078D4, #4A9EFF)',
+                color: 'white',
+                fontSize: '11px',
+                fontWeight: 600,
+                borderRadius: '12px'
+              }}>
+                Pro Plan
+              </span>
+              <span style={{ fontSize: '11px', color: 'var(--success)', fontWeight: 600 }}>● Active</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Model Selection Section */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '16px',
+          padding: '16px 20px',
+          background: 'var(--bg-secondary)',
+          borderRadius: '10px',
+          border: '1px solid var(--card-border)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '8px',
+              background: 'linear-gradient(135deg, #107C10, #6CCB5F)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '20px'
+            }}>
+              🤖
+            </div>
+            <div>
+              <label style={{
+                display: 'block',
+                fontSize: '11px',
+                fontWeight: 600,
+                color: 'var(--text-tertiary)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                marginBottom: '4px'
+              }}>
+                AI Model
+              </label>
+              <select style={{
+                padding: '8px 12px',
+                borderRadius: '8px',
+                border: '1px solid var(--card-border)',
+                background: 'var(--card-bg)',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                minWidth: '180px',
+                outline: 'none'
+              }}
+              onChange={(e) => {
+                e.target.style.background = 'var(--card-bg)';
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'var(--bg-secondary)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'var(--card-bg)';
+              }}>
+                <option value="gpt-4">GPT-4 (Default)</option>
+                <option value="gpt-5-premium">GPT-5 Premium</option>
+                <option value="claude-3-opus">Claude 3 Opus</option>
+                <option value="gemini-ultra">Gemini Ultra</option>
+              </select>
+            </div>
+          </div>
+          <div style={{
+            padding: '4px 10px',
+            background: 'rgba(16, 124, 16, 0.1)',
+            border: '1px solid rgba(16, 124, 16, 0.3)',
+            borderRadius: '8px',
+            fontSize: '11px',
+            fontWeight: 600,
+            color: 'var(--success)'
+          }}>
+            ✓ Active
+          </div>
+        </div>
+      </div>
+
       {/* KPI Cards */}
       <div style={{
         display: 'grid',
@@ -29,7 +155,7 @@ const OverviewDashboard = () => {
           value="$127,340"
           icon="💰"
           color="success"
-          change="23% vs last month"
+          change="↓ 37% reduction"
           changeType="positive"
         />
 
@@ -40,29 +166,32 @@ const OverviewDashboard = () => {
           icon="⚡"
           color="accent"
           progress={87.3}
-          target="Target: >80%"
+          target="Target: >80% | Improved from 52%"
         />
 
         <KPICard
-          title="CO₂ equivalent"
+          title="CO₂ reduction"
           value="4,230"
           unit=" kg"
           icon="🍃"
           color="success"
         >
           <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', fontStyle: 'italic' }}>
-            ≈ 17 trees planted
+            ↓ 47% this month ≈ 17 trees planted
           </div>
         </KPICard>
 
         <KPICard
-          title="Requiring attention"
-          value="3"
-          icon="⚠️"
-          color="warning"
-          badge={{ text: '2 High Priority', type: 'warning' }}
-          link={{ text: 'View all', href: '/issues' }}
-        />
+          title="Energy saved"
+          value="8,899"
+          unit=" kWh"
+          icon="⚡"
+          color="accent"
+        >
+          <div style={{ fontSize: '12px', color: 'var(--success)', fontWeight: 600 }}>
+            ↓ 340 kWh reduction (Last 30 days)
+          </div>
+        </KPICard>
       </div>
 
       {/* Status Banner */}
@@ -164,14 +293,14 @@ const OverviewDashboard = () => {
 
               {/* Area under energy line */}
               <path
-                d="M60,180 L160,160 L260,170 L360,140 L460,120 L560,110 L660,100 L760,80 L760,240 L60,240 Z"
+                d="M60,80 L160,95 L260,120 L360,145 L460,170 L560,195 L660,210 L760,220 L760,240 L60,240 Z"
                 fill="var(--accent)"
                 opacity="0.15"
               />
 
-              {/* Energy line (Blue) */}
+              {/* Energy line (Blue) - Decreasing from Day 1 to Day 30 */}
               <polyline
-                points="60,180 160,160 260,170 360,140 460,120 560,110 660,100 760,80"
+                points="60,80 160,95 260,120 360,145 460,170 560,195 660,210 760,220"
                 fill="none"
                 stroke="var(--accent)"
                 strokeWidth="3"
@@ -179,9 +308,9 @@ const OverviewDashboard = () => {
                 strokeLinejoin="round"
               />
 
-              {/* Cost line (Green) */}
+              {/* Cost line (Green) - Decreasing from Day 1 to Day 30 */}
               <polyline
-                points="60,200 160,185 260,190 360,165 460,150 560,140 660,130 760,115"
+                points="60,100 160,110 260,135 360,160 460,180 560,200 660,215 760,225"
                 fill="none"
                 stroke="var(--success)"
                 strokeWidth="3"
@@ -205,24 +334,25 @@ const OverviewDashboard = () => {
               <text x="360" y="265" textAnchor="middle" fontSize="12" fill="var(--text-tertiary)" fontWeight="500">Day 15</text>
               <text x="760" y="265" textAnchor="end" fontSize="12" fill="var(--text-tertiary)" fontWeight="500">Day 30</text>
 
-              {/* Data points */}
-              <circle cx="60" cy="180" r="4" fill="var(--accent)" />
-              <circle cx="160" cy="160" r="4" fill="var(--accent)" />
-              <circle cx="260" cy="170" r="4" fill="var(--accent)" />
-              <circle cx="360" cy="140" r="4" fill="var(--accent)" />
-              <circle cx="460" cy="120" r="4" fill="var(--accent)" />
-              <circle cx="560" cy="110" r="4" fill="var(--accent)" />
-              <circle cx="660" cy="100" r="4" fill="var(--accent)" />
-              <circle cx="760" cy="80" r="4" fill="var(--accent)" />
+              {/* Data points - Energy (Blue) */}
+              <circle cx="60" cy="80" r="4" fill="var(--accent)" />
+              <circle cx="160" cy="95" r="4" fill="var(--accent)" />
+              <circle cx="260" cy="120" r="4" fill="var(--accent)" />
+              <circle cx="360" cy="145" r="4" fill="var(--accent)" />
+              <circle cx="460" cy="170" r="4" fill="var(--accent)" />
+              <circle cx="560" cy="195" r="4" fill="var(--accent)" />
+              <circle cx="660" cy="210" r="4" fill="var(--accent)" />
+              <circle cx="760" cy="220" r="4" fill="var(--accent)" />
 
-              <circle cx="60" cy="200" r="4" fill="var(--success)" />
-              <circle cx="160" cy="185" r="4" fill="var(--success)" />
-              <circle cx="260" cy="190" r="4" fill="var(--success)" />
-              <circle cx="360" cy="165" r="4" fill="var(--success)" />
-              <circle cx="460" cy="150" r="4" fill="var(--success)" />
-              <circle cx="560" cy="140" r="4" fill="var(--success)" />
-              <circle cx="660" cy="130" r="4" fill="var(--success)" />
-              <circle cx="760" cy="115" r="4" fill="var(--success)" />
+              {/* Data points - Cost (Green) */}
+              <circle cx="60" cy="100" r="4" fill="var(--success)" />
+              <circle cx="160" cy="110" r="4" fill="var(--success)" />
+              <circle cx="260" cy="135" r="4" fill="var(--success)" />
+              <circle cx="360" cy="160" r="4" fill="var(--success)" />
+              <circle cx="460" cy="180" r="4" fill="var(--success)" />
+              <circle cx="560" cy="200" r="4" fill="var(--success)" />
+              <circle cx="660" cy="215" r="4" fill="var(--success)" />
+              <circle cx="760" cy="225" r="4" fill="var(--success)" />
             </svg>
           </div>
 

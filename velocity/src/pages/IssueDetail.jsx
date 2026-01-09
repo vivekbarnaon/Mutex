@@ -37,7 +37,7 @@ const IssueDetail = () => {
               fontSize: '20px',
               opacity: 0.6
             }}>
-              ⚠️
+              
             </div>
             <div style={{ fontSize: '32px', fontWeight: 700, marginBottom: '4px', color: 'var(--warning)' }}>3</div>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px' }}>Active Issues</div>
@@ -95,7 +95,7 @@ const IssueDetail = () => {
               fontSize: '20px',
               opacity: 0.6
             }}>
-              ⏱️
+              
             </div>
             <div style={{ fontSize: '32px', fontWeight: 700, marginBottom: '4px', color: 'var(--accent)' }}>2.3h</div>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px' }}>Avg Resolution Time</div>
@@ -124,7 +124,7 @@ const IssueDetail = () => {
               fontSize: '20px',
               opacity: 0.6
             }}>
-              🤖
+              
             </div>
             <div style={{ fontSize: '32px', fontWeight: 700, marginBottom: '4px', color: 'var(--accent)' }}>87%</div>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '8px' }}>Auto-Fix Success Rate</div>
@@ -150,7 +150,7 @@ const IssueDetail = () => {
                 severity: 'High',
                 time: '2 hours ago',
                 metric: '67.4% idle',
-                icon: '⚠️',
+                icon: '',
                 autoFixAvailable: true
               },
               {
@@ -160,7 +160,7 @@ const IssueDetail = () => {
                 severity: 'High',
                 time: '5 hours ago',
                 metric: '8.2 GB/hour growth',
-                icon: '💧',
+                icon: '',
                 autoFixAvailable: true
               },
               {
@@ -170,7 +170,7 @@ const IssueDetail = () => {
                 severity: 'Medium',
                 time: '1 day ago',
                 metric: '23% below optimal',
-                icon: '📊',
+                icon: '',
                 autoFixAvailable: false
               }
             ].map((issue) => (
