@@ -4,6 +4,7 @@ import OverviewDashboard from './pages/OverviewDashboard';
 import IssueDetail from './pages/IssueDetail';
 import AutoFix from './pages/AutoFix';
 import ComplianceAudit from './pages/ComplianceAudit';
+import Pricing from './pages/Pricing';
 import Settings from './pages/Settings';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/issues" element={<IssueDetail />} />
         <Route path="/auto-fix" element={<AutoFix />} />
         <Route path="/compliance" element={<ComplianceAudit />} />
+        <Route path="/pricing" element={<Pricing />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
